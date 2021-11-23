@@ -1,0 +1,15 @@
+@import "index.css";
+.regbox{
+    width: 320px;
+    height: 420px;
+    background: linear-gradient(to right, #9c27b0, #8ecdff);
+    margin: 0;
+    padding: 30px;
+    top: 55%;
+    left: 50%;
+    color: #fff;
+    border-radius: 15px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+}
