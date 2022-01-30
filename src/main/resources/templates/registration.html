@@ -13,15 +13,16 @@
         <h1>Register Account</h1>
         <form>
             <p>Username</p>
-            <input name="name" placeholder="Username" required type="text"/>
+            <input name="name" required type="text"/>
             <p>Useremail</p>
-            <input name="email" placeholder="Useremail" required type="text"/>
+            <input name="email" required type="text"/>
             <p>Password</p>
             <input name="password" placeholder="Password" required type="password"/>
             <input type="submit" value="Register"/>
-            <a th:href="index.html">Already have Account?</a>
+            <a onclick="openLoginWindow()">Already have Account?</a>
         </form>
     </div>
 </div>
+<script th:src="@{/dist/lib/controllers/registration-controller.js}"></script>
 </body>
 </html>

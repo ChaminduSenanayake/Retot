@@ -13,16 +13,16 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/v1/registerUser")
-public class RegistrationController {
+@RequestMapping("/api/v1/login")
+public class LoginController {
     @Autowired
     private UserService userService;
 
     @GetMapping("/")
     public ModelAndView loadPage(HttpServletRequest request){
-        return new ModelAndView("registration.html") ;
+        return new ModelAndView("index.html") ;
     }
-    public ResponseDTO registerUser(@RequestBody UserDTO userDTO){
-        return userService.registerUser(userDTO);
+    public UserDTO login(@RequestBody UserDTO userDTO){
+        return userService.login(userDTO);
     }
 }

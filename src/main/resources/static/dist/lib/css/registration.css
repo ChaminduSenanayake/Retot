@@ -1,7 +1,7 @@
 @import "index.css";
 .regbox{
-    width: 320px;
-    height: 420px;
+    width: 520px;
+    height: 450px;
     background: linear-gradient(to right, #9c27b0, #8ecdff);
     margin: 0;
     padding: 30px;

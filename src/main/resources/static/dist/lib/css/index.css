@@ -60,6 +60,7 @@ body {
     border-radius: 5px;
 }
 
+
 .box input[type="text"],
 .box input[type="password"] {
     border: none;
@@ -76,7 +77,7 @@ body {
     outline: none;
     height: 35px;
     background: #eccc68;
-    color: #000;
+    color: #fff;
     font-size: 20px;
     border-radius: 20px;
     margin-top:20px ;
@@ -86,7 +87,7 @@ body {
     border: none;
     outline: none;
     height: 35px;
-    background: #27997c;
+    background: #e5ad12;
     color: #fff;
     font-size: 20px;
     border-radius: 20px;
