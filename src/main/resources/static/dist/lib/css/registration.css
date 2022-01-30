@@ -1,11 +1,27 @@
-@import "index.css";
+body {
+    background-image: url("../images/Login.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Arimo', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+}
 .regbox{
-    width: 520px;
-    height: 450px;
-    background: linear-gradient(to right, #9c27b0, #8ecdff);
+    /*background: linear-gradient(to right, #9c27b0, #8ecdff);*/
+    width: 500px;
+    background-color: white;
     margin: 0;
     padding: 30px;
-    top: 55%;
+    padding-top: 0px;
+    top: 50%;
     left: 50%;
     color: #fff;
     border-radius: 15px;
@@ -13,3 +29,82 @@
     transform: translate(-50%, -50%);
     box-sizing: border-box;
 }
+
+.regbox h1{
+    margin-top: 10px;
+    padding: 30px;
+    text-align: center;
+    font-size: 30px;
+    color: #bababa;
+    font-weight: bold;
+}
+
+.regbox p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    color: black;
+}
+
+.regbox input {
+    width: 100%;
+    margin-bottom: 25px;
+    border-radius: 5px;
+}
+
+
+.regbox input[type="text"],
+.regbox input[type="password"] {
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid #0c0c0c;
+    outline: none;
+    height: 35px;
+    font-size: 15px;
+}
+
+.regbox input[type="submit"] {
+    display: block;
+    border: none;
+    outline: none;
+    height: 35px;
+    background: #eccc68;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 20px;
+    margin-top:20px ;
+}
+
+.regbox input[type="submit"]:hover {
+    border: none;
+    outline: none;
+    height: 35px;
+    background: #e5ad12;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: .3s ease-out;
+}
+
+.regbox a {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+}
+
+.regbox a:hover {
+    color: #eccc68;
+}
+
+.regbox #btnRegister{
+    font-size: 15px;
+    cursor: pointer;
+    color: #187395;
+}
+
+.regbox #btnRegister:hover{
+    color: #0e98cd;
+}
+

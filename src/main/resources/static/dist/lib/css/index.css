@@ -1,3 +1,6 @@
+h1{
+    color: slateblue;
+}
 body {
     background-image: url("../images/Login.jpg");
     background-size: cover;
@@ -16,9 +19,10 @@ body {
 }
 
 .box{
+    height: 450px;
     width: 420px;
-    height: 420px;
-    background: linear-gradient(to right, #9c27b0, #549ace);
+    /*background: linear-gradient(to right, #ffffff, #ffffff);*/
+    background-color: white;
     margin: 0;
     padding: 30px;
     top: 55%;
@@ -28,6 +32,7 @@ body {
     position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
+    border: 5px solid #e3e3e3;
 }
 
 .avatar {
@@ -42,16 +47,19 @@ body {
 }
 
 .box h1{
-    margin: 0;
+    margin-top: 10px;
     padding: 30px;
     text-align: center;
     font-size: 30px;
+    color: #bababa;
+    font-weight: bold;
 }
 
 .box p{
     margin: 0;
     padding: 0;
     font-weight: bold;
+    color: black;
 }
 
 .box input {
@@ -65,7 +73,7 @@ body {
 .box input[type="password"] {
     border: none;
     background: transparent;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #0c0c0c;
     outline: none;
     height: 35px;
     font-size: 15px;
@@ -97,13 +105,18 @@ body {
 
 .box a {
     text-decoration: none;
-    color: #fff;
     font-size: 12px;
     font-weight: bold;
+    color: black;
 }
-.box #btnCreateNew{
+.box #btnRegister{
     font-size: 15px;
     cursor: pointer;
+    color: #187395;
+}
+
+.box #btnRegister:hover{
+    color: #0e98cd;
 }
 
 .box a:hover {

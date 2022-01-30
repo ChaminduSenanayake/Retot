@@ -5,15 +5,15 @@ import javax.persistence.Id;
 
 public class UserDTO {
     private String userId;
-    private String FirstName;
-    private String LastName;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
 
     public UserDTO(String userId, String firstName, String lastName, String email, String password) {
         this.userId = userId;
-        FirstName = firstName;
-        LastName = lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
     }
@@ -27,19 +27,19 @@ public class UserDTO {
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
-        FirstName = firstName;
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     public String getEmail() {

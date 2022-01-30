@@ -16,13 +16,14 @@ public class UserService {
     private UserRepository userRepository;
 
     public ResponseDTO registerUser(UserDTO userDTO){
+        System.out.println(getNewID());
         User user = new User(getNewID(),userDTO.getFirstName(),userDTO.getLastName(),userDTO.getEmail(),userDTO.getPassword());
-        if(getUserByEmail(userDTO.getEmail()).equals(null)){
+        if(getUserByEmail(userDTO.getEmail())==null){
             userRepository.save(user);
-            if (userRepository.findById(userDTO.getUserId()).isPresent()){
+            if (userRepository.findById(user.getUserId()).isPresent()){
                 return new ResponseDTO(true,"User Registerd Successfully");
             }
-        }else{
+        }else if(getUserByEmail(userDTO.getEmail())!=null){
             return new ResponseDTO(false,"User Already Exists");
         }
         return new ResponseDTO(false,"User Registration Failed");
@@ -30,12 +31,17 @@ public class UserService {
 
     public UserDTO getUserByEmail(String email){
         User user = userRepository.getByEmail(email);
-        return new UserDTO(user.getUserId(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getPassword());
+        if (user!=null){
+            return new UserDTO(user.getUserId(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getPassword());
+        }else{
+            return null;
+        }
+
     }
 
     public UserDTO login(UserDTO dto){
-        User user = userRepository.getByEmailAndPassword(dto.getEmail(),dto.getPassword());
-        if (user.equals(null)){
+        User user = userRepository.getByEmail(dto.getEmail());
+        if (user!=null && user.getPassword().equalsIgnoreCase(dto.getPassword())){
             return new UserDTO(user.getUserId(),user.getFirstName(),user.getLastName(),user.getEmail(),"");
         }else{
             return null;
