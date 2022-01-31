@@ -1,0 +1,39 @@
+body {
+    margin: 0 auto;
+    padding: 0;
+    height: 100%;
+/*    background: linear-gradient(to right, #ffffff, #f79bff);*/
+
+}
+.navbar .container-fluid{
+    background-color: #ffffff;
+    margin-top: -10px;
+}
+.nav-item{
+    color: black;
+    border: 1px solid #8f31b8;
+    border-radius: 30px;
+    margin-right: 10px;
+    padding-left:10px ;
+    padding-right:10px ;
+}
+.nav-item:hover{
+    background-color: #b47cd0;
+    color: white;
+}
+
+.settings {
+    border: none;
+}
+
+.card:hover{
+    transform: scale(1.05);
+}
+.card img{
+    height: 200px;
+    width: auto;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
