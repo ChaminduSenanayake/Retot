@@ -49,8 +49,8 @@ h1 {
 }
 .importCSV {
     margin-left: 90px;
-    float: right;
-
+    float: left;
+    width: 110px;
 }
 
 .buttonGroup Process{

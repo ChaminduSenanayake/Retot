@@ -1,0 +1,16 @@
+.navbar .container-fluid{
+    background-color: #ffffff;
+    margin-top: -10px;
+}
+.nav-item{
+    color: black;
+    border: 1px solid #8f31b8;
+    border-radius: 30px;
+    margin-right: 10px;
+    padding-left:10px ;
+    padding-right:10px ;
+}
+.nav-item:hover{
+    background-color: #b47cd0;
+    color: white;
+}

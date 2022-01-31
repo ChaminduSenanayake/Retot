@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register Account</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/dist/lib/css/optimizePage.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/dist/lib/css/navBar.css}" type="text/css"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid px-3">
+        <a class="navbar-brand ms-4 mt-1" href="#"><img th:src="@{/dist/lib/images/Logo.png}" width="150px"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="openNavigationWindow()">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="openOptimizationWindow()">Optimize Test Cases</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Report Bugs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Affected Areas</a>
+                </li>
+                <li class="nav-item settings">
+                    <a class="nav-link" href="#"><i class="fas fa-user-cog"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class=" mt-5 pt-5">
+    <div class="buttonGroup">
+        <button type="button" id="btnAdd" onclick="addRow()">Add new row</button>
+        <button type="button" id="btnAddCol" onclick="addColumn()" class="append_column">Add new column</button>
+        <button type="button" id="GenDocument" onclick="tableToCSV()">Download CSV document</button>
+        <button type="button" id="GenDocumentPWD" onclick="tableToTxt()">Generate pairwise test case document</button>
+        <button type="button" ><input type="file" id="myFile" onchange="processFile()"></button>
+    </div>
+    <div class="lowerSection">
+        <table id="dataTable" width="350px">
+            <thead>
+            <tr id="Row0">
+                <td style="top: 100px;" class="space">&nbsp;&nbsp;&nbsp;</td>
+                <td style="top: 100px;" align="center"><input type="button" value="Remove" class="btnRemove" name="button_C1" onclick="removeColumn(name)"></td>
+                <td style="top: 100px;" align="center"><input type="button" value="Remove" class="btnRemove" name="button_C2" onclick="removeColumn(name)"></td>
+            </tr>
+            <tr id="Row1">
+                <td style="top: 100px;" class="space">&nbsp;&nbsp;&nbsp;</td>
+                <td style="top: 100px;"><input type="text" placeholder="Column 1" class="columnName" id="Column_1">
+                </td>
+                <td style="top: 100px;"><input type="text" placeholder="Column 2" class="columnName" id="Column_2">
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="Row2">
+                <td style="top: 100px;"><input type="button" value="Remove" name="button_R1" onclick="removeRow('button_R1')" class="btnRemove"></td>
+                <td style="top: 100px;"><input type="text" placeholder="" class="input">
+                </td>
+                <td style="top: 100px;"><input type="text" placeholder="" class="input">
+                </td>
+            </tr>
+            <tr id="Row3">
+                <td style="top: 100px;"><input type="button" value="Remove" name="button_R2" onclick="removeRow('button_R2')" class="btnRemove"></td>
+                <td style="top: 100px;"><input type="text" placeholder="" class="input">
+                </td>
+                <td style="top: 100px;"><input type="text" placeholder="" class="input">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script th:src="@{/dist/lib/jquery/jquery.min.js}"></script>
+<script th:src="@{/dist/lib/js/sweetalert.js}"></script>
+<script th:src="@{/dist/lib/controllers/testOptimization-controller.js}"></script>
+
+</body>
+
+</html>
