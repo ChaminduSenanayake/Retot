@@ -105,9 +105,9 @@ function tableToCSV() {
         }
         csv.push(rowDetails.join(","));
     }
-
+    var fileName = $('#txtFileName').val();
     // Download CSV
-    download_csv(csv.join("\n"), "Test Case Document.csv");
+    download_csv(csv.join("\n"), fileName);
 
 
 }
@@ -145,14 +145,14 @@ function clearTable() {
     rowCount = 0;
 }
 
-function processFile() {
+function processCSVFile(tableName,fileName) {
     //get table element
-    var table = document.getElementById('dataTable');
+    var table = document.getElementById(tableName);
     //remove existing rows and columns
     clearTable();
     var fileSize = 0;
     //get file
-    var theFile = document.getElementById("myFile");
+    var theFile = document.getElementById(fileName);
 
     var regex = /^([a-zA-Z0-9~@#$^*()_+=[\]{}|\\,.?: -])+(.csv|.txt)$/;
     //check if file is CSV
@@ -226,18 +226,59 @@ function tableToTxt() {
     txtFile = new Blob([txt], {
         type: "text/txt"
     });
-    downloadLink = document.createElement("a"); // Download link
-    downloadLink.download = "Model.txt"; // File name
-    downloadLink.href = window.URL.createObjectURL(txtFile); // We have to create a link to the file
-    downloadLink.style.display = "none"; // Make sure that the link is not displayed
-    document.body.appendChild(downloadLink); // Add the link to your DOM
-    downloadLink.click(); // Lanzamos
+    return txtFile;
+    // downloadLink = document.createElement("a"); // Download link
+    // downloadLink.download = "Model.txt"; // File name
+    // downloadLink.href = window.URL.createObjectURL(txtFile); // We have to create a link to the file
+    // downloadLink.style.display = "none"; // Make sure that the link is not displayed
+    // document.body.appendChild(downloadLink); // Add the link to your DOM
+    // downloadLink.click(); // Lanzamos
 
-    setTimeout(alert("Test Case Document Generated Successfully"), 5000);
-
+    //setTimeout(alert("Test Case Document Generated Successfully"), 5000);
 }
 const baseURL = "http://localhost:8080/api/v1/";
 function openNavigationWindow() {
     location.href = baseURL + "home/";
     return false;
+}
+
+function openDownloadTable() {
+    let downloadModal = new bootstrap.Modal(document.getElementById('downloadModal'));
+    $('#downloadModal').on('show.bs.modal', function(event) {
+        let modal = $(this);
+    })
+    downloadModal.show();
+}
+
+function openOptimizedTestCaseDocument() {
+    let testCaseModal = new bootstrap.Modal(document.getElementById('testCaseModal'));
+    $('#testCaseModal').on('show.bs.modal', function(event) {
+        let modal = $(this);
+    })
+    testCaseModal.show();
+}
+
+
+function generateTestCaseDocument(){
+    let formData = new FormData();
+    formData.append('testTxt',tableToTxt());
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: baseURL + "testOptimization/optimize",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            if (response) {
+                swal("Good job!", "Test Case Document Generated Successfully!", "success");
+            } else {
+                swal("OOps!", "You clicked the button!", "error");
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
+    event.preventDefault();
 }

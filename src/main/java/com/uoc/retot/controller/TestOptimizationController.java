@@ -2,9 +2,8 @@ package com.uoc.retot.controller;
 
 import com.uoc.retot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,5 +17,8 @@ public class TestOptimizationController {
         return new ModelAndView("optimizationPage.html");
     }
 
-
+    @PostMapping("/optimize")
+    public MultipartFile optimizeDocument(@RequestParam("testTxt") MultipartFile testTxt){
+        return testTxt;
+    }
 }

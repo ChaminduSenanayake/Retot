@@ -28,9 +28,15 @@ public class UserController {
     @PostMapping("/validate")
     public UserDTO login(@RequestBody UserDTO userDTO,HttpServletRequest request){
         UserDTO dto = userService.login(userDTO);
-//        if(dto!=null){
-//            request.getSession().setAttribute("user_session", dto);
-//        }
+        if(dto!=null){
+            request.getSession().setAttribute("user_session", dto);
+        }
         return dto;
+    }
+    @GetMapping("/logout")
+    public ModelAndView logOut(HttpServletRequest request) {
+        //invalidate the session , this will clear the data from configured database (Mysql/redis/hazelcast)
+        request.getSession().invalidate();
+        return new ModelAndView("index.html");
     }
 }

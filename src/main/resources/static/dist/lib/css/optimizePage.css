@@ -99,3 +99,9 @@ button {
 #Row1 {
     background-color: white;
 }
+.btn-danger{
+    color: darkred;
+}
+.btn-primary{
+    color: #0f4baa;
+}
