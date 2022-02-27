@@ -6,6 +6,8 @@ public class UploadFileResponseDTO {
     private String targetLocation;
     private String fileType;
     private long size;
+    private boolean success;
+    private String message;
 
     public UploadFileResponseDTO(String fileName, String fileDownloadUri, String targetLocation, String fileType, long size) {
         this.fileName = fileName;
@@ -13,6 +15,11 @@ public class UploadFileResponseDTO {
         this.targetLocation = targetLocation;
         this.fileType = fileType;
         this.size = size;
+    }
+
+    public UploadFileResponseDTO(boolean success, String message) {
+        this.success = success;
+        this.message = message;
     }
 
     public String getFileName() {
@@ -53,5 +60,21 @@ public class UploadFileResponseDTO {
 
     public void setSize(long size) {
         this.size = size;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

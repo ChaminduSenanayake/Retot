@@ -91,7 +91,7 @@ function removeColumn(btnName) {
     }
 }
 
-function tableToCSV() {
+function tableToCSV(table) {
     var csv = [];
     var existingRowCount = table.rows.length;
     var exisitingColumnCount = table.rows[0].cells.length;
@@ -105,19 +105,18 @@ function tableToCSV() {
         }
         csv.push(rowDetails.join(","));
     }
-    var fileName = $('#txtFileName').val();
-    // Download CSV
-    download_csv(csv.join("\n"), fileName);
 
-
+    csvFile = new Blob([csv.join("\n")], {
+        type: "text/csv"
+    });
+    return csvFile;
 }
 
-function download_csv(csv, filename) {
-    var csvFile;
-    var downloadLink;
-    csvFile = new Blob([csv], {
-        type: "text/csv"
-    }); // CSV FILE
+function downloadCSV() {
+    event.preventDefault();
+    let csvFile = tableToCSV(table);
+    let downloadLink;
+    let filename = $('#txtFileName').val();
     downloadLink = document.createElement("a"); // Download link
     downloadLink.download = filename; // File name
     downloadLink.href = window.URL.createObjectURL(csvFile); // We have to create a link to the file
@@ -128,17 +127,17 @@ function download_csv(csv, filename) {
 
 
 function clearTable() {
-    var table = document.getElementById('dataTable');
-    var existingRowCount = table.rows.length;
-    var exisitingColumnCount = table.rows[0].cells.length;
+    let table = document.getElementById('dataTable');
+    let existingRowCount = table.rows.length;
+    let exisitingColumnCount = table.rows[0].cells.length;
 
-    for (var i = existingRowCount - 1; i > 1; i--) {
+    for (let i = existingRowCount - 1; i > 1; i--) {
         table.deleteRow(i);
     }
-    for (var j = exisitingColumnCount - 1; j > 0; j--) {
-        var row1 = table.rows[0];
+    for (let j = exisitingColumnCount - 1; j > 0; j--) {
+        let row1 = table.rows[0];
         row1.deleteCell(j);
-        var row2 = table.rows[1];
+        let row2 = table.rows[1];
         row2.deleteCell(j)
     }
     columnCount = 0;
@@ -242,7 +241,7 @@ function openNavigationWindow() {
     return false;
 }
 
-function openDownloadTable() {
+function openDownloadCSVModal() {
     let downloadModal = new bootstrap.Modal(document.getElementById('downloadModal'));
     $('#downloadModal').on('show.bs.modal', function(event) {
         let modal = $(this);
@@ -250,7 +249,34 @@ function openDownloadTable() {
     downloadModal.show();
 }
 
+function saveDataTable(){
+    let formData = new FormData();
+    formData.append('testTableCSV',tableToCSV(table));
+    formData.append('fileName',$('#txtFileName').val());
+
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: baseURL + "testOptimization/saveDataTable",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            if (response.success) {
+                swal("Good job!", response.message, "success");
+            } else {
+                swal("OOps!",response.message, "error");
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
+    event.preventDefault();
+}
+
 function openOptimizedTestCaseDocument() {
+    generateTestCaseDocument()
     let testCaseModal = new bootstrap.Modal(document.getElementById('testCaseModal'));
     $('#testCaseModal').on('show.bs.modal', function(event) {
         let modal = $(this);
@@ -270,10 +296,11 @@ function generateTestCaseDocument(){
         processData: false,
         contentType: false,
         success: function (response) {
-            if (response) {
-                swal("Good job!", "Test Case Document Generated Successfully!", "success");
+            if (response.success) {
+
+                swal("Good job!", response.message, "success");
             } else {
-                swal("OOps!", "You clicked the button!", "error");
+                swal("OOps!",response.message, "error");
             }
         },
         error: function (error) {

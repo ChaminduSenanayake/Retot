@@ -29,7 +29,9 @@ public class UserController {
     public UserDTO login(@RequestBody UserDTO userDTO,HttpServletRequest request){
         UserDTO dto = userService.login(userDTO);
         if(dto!=null){
-            request.getSession().setAttribute("user_session", dto);
+            request.getSession().setAttribute("user_name", dto.getFirstName()+" "+dto.getLastName());
+            request.getSession().setAttribute("user_id", dto.getUserId());
+            request.getSession().setAttribute("user_email", dto.getEmail());
         }
         return dto;
     }

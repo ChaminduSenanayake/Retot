@@ -49,10 +49,9 @@ public class FileStorageService {
             Path targetLocation = getFileUploadPath(folder).resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-
             String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/api/v1/")
-                    .path("/get/")
+                    .path("/getFiles/")
                     .path( folder + "/" + fileName)
                     .toUriString();
 

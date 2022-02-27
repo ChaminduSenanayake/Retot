@@ -22,6 +22,9 @@
                     <a class="nav-link" href="#" onclick="openNavigationWindow()">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="openOptimizationWindow()">My Previous Documents</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#" onclick="openOptimizationWindow()">Optimize Test Cases</a>
                 </li>
                 <li class="nav-item">
@@ -39,7 +42,7 @@
     <div class="buttonGroup">
         <button type="button" id="btnAdd" onclick="addRow()">Add new row</button>
         <button type="button" id="btnAddCol" onclick="addColumn()" class="append_column">Add new column</button>
-        <button type="button" id="GenDocument" onclick="openDownloadTable()">Download CSV document</button>
+        <button type="button" id="saveTableData" onclick="openDownloadCSVModal()">Save & Download</button>
         <button type="button" id="GenDocumentPWD" onclick="openOptimizedTestCaseDocument()">Generate pairwise test case document</button>
         <button type="button" ><input type="file" id="myFile" onchange="processCSVFile(dataTable,myFile)"></button>
     </div>
@@ -90,12 +93,15 @@
                     <div class="form-group row mb-3">
                         <label class="col-sm-3 col-form-label">File Name</label>
                         <div class="col-sm-9">
-                            <input class="form-control " id="txtFileName" placeholder="File Name" value="Table Document.csv">
+                            <input class="form-control " id="txtFileName" placeholder="File Name" value="Table Document">
                         </div>
                     </div>
                     <div class=" col-md-12 text-end mt-4 ">
-                        <button onclick="tableToCSV()" class=" btn btn-primary mb-2 px-5"><i
-                                class="fas fa-edit"></i>&nbsp Save & Download
+                        <button onclick="saveDataTable()" class=" btn btn-primary mb-2 px-5"><i
+                                class="fas fa-edit"></i>&nbsp Save
+                        </button>
+                        <button onclick="downloadCSV()" class=" btn btn-primary mb-2 px-5"><i
+                                class="fas fa-edit"></i>&nbsp Download
                         </button>
                         <button class="btn btn-danger mb-2 px-5" data-bs-dismiss="modal"
                                 aria-label="Close"><i class="fas fa-window-close"></i>&nbsp Close
@@ -112,12 +118,13 @@
         <div class="modal-content ">
             <div class="modal-header">
                 <h5 class="modal-title">Generated Test Case Document</h5>
-                <button id="btnDownload" type="submit" onclick="tableToCSV()" class=" btn btn-primary mb-2 px-5"><i
-                        class="fas fa-edit"></i>&nbsp Save & Download
+                <button id="btnDownload" onclick="tableToCSV()" class=" btn btn-primary mb-2 px-5 ms-5"><i
+                        class="fas fa-edit"></i>&nbsp Download
                 </button>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body mt-2 mx-3">
+                <button type="button" ><input type="file" id="generatedFile" disabled="true"></button>
                 <table id="generatedTable" width="350px">
                     <thead>
                     </thead>
