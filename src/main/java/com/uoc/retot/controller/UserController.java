@@ -29,16 +29,15 @@ public class UserController {
     public UserDTO login(@RequestBody UserDTO userDTO,HttpServletRequest request){
         UserDTO dto = userService.login(userDTO);
         if(dto!=null){
-            request.getSession().setAttribute("user_name", dto.getFirstName()+" "+dto.getLastName());
-            request.getSession().setAttribute("user_id", dto.getUserId());
-            request.getSession().setAttribute("user_email", dto.getEmail());
+            request.getSession().setAttribute("userName", dto.getFirstName()+" "+dto.getLastName());
+            request.getSession().setAttribute("userId", dto.getUserId());
+            request.getSession().setAttribute("userEmail", dto.getEmail());
         }
         return dto;
     }
     @GetMapping("/logout")
     public ModelAndView logOut(HttpServletRequest request) {
         //invalidate the session , this will clear the data from configured database (Mysql/redis/hazelcast)
-        request.getSession().invalidate();
-        return new ModelAndView("index.html");
+        return new ModelAndView("loginPage.html");
     }
 }

@@ -1,5 +1,3 @@
-const baseURL = "http://localhost:8080/api/v1/";
-
 $(document).ready(function () {
     $('#registration').submit(function (event) {
         event.preventDefault();

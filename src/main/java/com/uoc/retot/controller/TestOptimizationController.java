@@ -21,13 +21,23 @@ public class TestOptimizationController {
 
     @GetMapping("/")
     public ModelAndView loadOptimizationPage(HttpServletRequest request) {
-        return new ModelAndView("optimizationPage.html");
+        HttpSession session = request.getSession();
+        Object userId = request.getSession().getAttribute("userId");
+        if(session!=null && userId!=null){
+            ModelAndView model=new ModelAndView("optimizationPage.html");
+            model.addObject("userId",userId.toString());
+            return model;
+        }else{
+            ModelAndView model=new ModelAndView("loginPage.html");
+            model.addObject("sessionExpired","Session Expired...! Please sign in again");
+            return model;
+        }
     }
 
     @PostMapping("/saveDataTable")
     public UploadFileResponseDTO uploadCSVDocument(@RequestParam("testTableCSV") MultipartFile testTableCSV,@RequestParam("fileName") String fileName, HttpServletRequest request){
         HttpSession session = request.getSession();
-        String userId = (String) request.getSession().getAttribute("user_id");
+        String userId = (String) request.getSession().getAttribute("userId");
         if (userId != null) {
             return testOptimizationService.uploadCSVDocument(testTableCSV,fileName, userId);
         }else{
@@ -38,7 +48,7 @@ public class TestOptimizationController {
     @PostMapping("/optimize")
     public UploadFileResponseDTO optimizeTestCases(@RequestParam("testTxt") MultipartFile testTxt, HttpServletRequest request){
         HttpSession session = request.getSession();
-        String userId = (String) request.getSession().getAttribute("user_id");
+        String userId = (String) request.getSession().getAttribute("userId");
         if (userId != null) {
             return testOptimizationService.optimizeTestCases(testTxt, userId);
         }else{

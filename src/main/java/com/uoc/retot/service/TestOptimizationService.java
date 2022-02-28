@@ -59,7 +59,7 @@ public class TestOptimizationService {
                 uploadDTO.setFileName(generatedFileName);
                 uploadDTO.setTargetLocation(fileLocation+generatedFileName);
                 uploadDTO.setFileDownloadUri(uploadDTO.getFileDownloadUri().replace(txtFileName,generatedFileName));
-                uploadDTO.setMessage("Table data saved successfully");
+                uploadDTO.setMessage("Pairwise Test Case Document Generated successfully...!");
                 uploadDTO.setSuccess(true);
             } catch (Exception e) {
                 new OtherException("Generate Pairwise Document failed");

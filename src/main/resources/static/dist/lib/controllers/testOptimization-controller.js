@@ -1,6 +1,9 @@
 var table = document.getElementById('dataTable');
 var columnCount = 2;
 var rowCount = 2;
+$(document).ready(function () {
+    $('#selectedItem').css('font-weight','bold')
+});
 
 function addRow() {
     var existingRowCount = table.rows.length;
@@ -15,7 +18,7 @@ function addRow() {
     var btnName = "button_R" + (rowCount + 1);
     element1.name = btnName;
     element1.setAttribute('value', 'Remove');
-    element1.onclick = function() {
+    element1.onclick = function () {
         removeRow(btnName)
     }
     element1.className = "btnRemove";
@@ -55,7 +58,7 @@ function addColumn() {
     element1.setAttribute('value', 'Remove');
     element1.className = "btnRemove";
     cell.setAttribute('align', 'center');
-    element1.onclick = function() {
+    element1.onclick = function () {
         removeColumn(btnName);
     }
     cell.appendChild(element1)
@@ -100,7 +103,8 @@ function tableToCSV(table) {
         var rowDetails = [];
         for (let j = 1; j < exisitingColumnCount; j++) {
             var row = table.rows[i];
-            var rowObj = row.cells[j].childNodes[0];;
+            var rowObj = row.cells[j].childNodes[0];
+            ;
             rowDetails.push(rowObj.value);
         }
         csv.push(rowDetails.join(","));
@@ -144,25 +148,25 @@ function clearTable() {
     rowCount = 0;
 }
 
-function processCSVFile(tableName,fileName) {
+function processCSVFile() {
     //get table element
-    var table = document.getElementById(tableName);
+    var table = document.getElementById('dataTable');
     //remove existing rows and columns
     clearTable();
     var fileSize = 0;
     //get file
-    var theFile = document.getElementById(fileName);
+    var theFile = document.getElementById('myFile');
 
     var regex = /^([a-zA-Z0-9~@#$^*()_+=[\]{}|\\,.?: -])+(.csv|.txt)$/;
     //check if file is CSV
     if (regex.test(theFile.value.toLowerCase())) {
         //check if browser support FileReader
-        if (typeof(FileReader) != "undefined") {
+        if (typeof (FileReader) != "undefined") {
             var headerLine = "";
             //create html5 file reader object
             var myReader = new FileReader();
             // call filereader. onload function
-            myReader.onload = function(e) {
+            myReader.onload = function (e) {
                 var content = myReader.result;
                 //split csv file using "\n" for new line ( each row)
                 var lines = content.split("\n");
@@ -202,6 +206,7 @@ function processCSVFile(tableName,fileName) {
     }
 
 }
+
 function tableToTxt() {
     var model = [];
     var txt = "";
@@ -235,7 +240,7 @@ function tableToTxt() {
 
     //setTimeout(alert("Test Case Document Generated Successfully"), 5000);
 }
-const baseURL = "http://localhost:8080/api/v1/";
+
 function openNavigationWindow() {
     location.href = baseURL + "home/";
     return false;
@@ -243,16 +248,16 @@ function openNavigationWindow() {
 
 function openDownloadCSVModal() {
     let downloadModal = new bootstrap.Modal(document.getElementById('downloadModal'));
-    $('#downloadModal').on('show.bs.modal', function(event) {
+    $('#downloadModal').on('show.bs.modal', function (event) {
         let modal = $(this);
     })
     downloadModal.show();
 }
 
-function saveDataTable(){
+function saveDataTable() {
     let formData = new FormData();
-    formData.append('testTableCSV',tableToCSV(table));
-    formData.append('fileName',$('#txtFileName').val());
+    formData.append('testTableCSV', tableToCSV(table));
+    formData.append('fileName', $('#txtFileName').val());
 
     $.ajax({
         type: "POST",
@@ -265,7 +270,7 @@ function saveDataTable(){
             if (response.success) {
                 swal("Good job!", response.message, "success");
             } else {
-                swal("OOps!",response.message, "error");
+                swal("OOps!", response.message, "error");
             }
         },
         error: function (error) {
@@ -275,19 +280,9 @@ function saveDataTable(){
     event.preventDefault();
 }
 
-function openOptimizedTestCaseDocument() {
-    generateTestCaseDocument()
-    let testCaseModal = new bootstrap.Modal(document.getElementById('testCaseModal'));
-    $('#testCaseModal').on('show.bs.modal', function(event) {
-        let modal = $(this);
-    })
-    testCaseModal.show();
-}
-
-
-function generateTestCaseDocument(){
+function generateTestCaseDocument() {
     let formData = new FormData();
-    formData.append('testTxt',tableToTxt());
+    formData.append('testTxt', tableToTxt());
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
@@ -296,16 +291,27 @@ function generateTestCaseDocument(){
         processData: false,
         contentType: false,
         success: function (response) {
-            if (response.success) {
-
-                swal("Good job!", response.message, "success");
-            } else {
-                swal("OOps!",response.message, "error");
+            if(response.success){
+                let testCaseModal = new bootstrap.Modal(document.getElementById('generaedTestCasesModal'));
+                $('#generaedTestCasesModal').on('show.bs.modal', function (event) {
+                    let modal = $(this);
+                    modal.find('#generatedTestCasesMsg').text(response.message);
+                    modal.find('#downloadDocBtn').attr("href",response.fileDownloadUri);
+                    if(!response.success){
+                        modal.find('#downloadDocBtn').css("display","none");
+                    }
+                })
+                testCaseModal.show();
+            }else{
+                swal("OOps!","Unable to Generate Pairwise Testcase Document", "error");
             }
         },
         error: function (error) {
-            console.log(error);
+            swal("OOps!","Unable to Generate Pairwise Testcase Document", "error");
         }
     })
     event.preventDefault();
+}
+function logOut(){
+    location.href = baseURL+"user/logout"
 }

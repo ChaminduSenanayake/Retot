@@ -1,4 +1,3 @@
-const baseURL = "http://localhost:8080/api/v1/";
 $(document).ready(function () {
     $('#login').submit(function (event) {
         event.preventDefault();
