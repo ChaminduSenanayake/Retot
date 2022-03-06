@@ -1,10 +1,7 @@
 package com.uoc.retot.controller;
 
-import com.uoc.retot.dto.ResponseDTO;
 import com.uoc.retot.dto.UploadFileResponseDTO;
-import com.uoc.retot.dto.UserDTO;
 import com.uoc.retot.service.TestOptimizationService;
-import com.uoc.retot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,6 +1,5 @@
 package com.uoc.retot.service;
 
-import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
 import com.uoc.retot.dto.ResponseDTO;
 import com.uoc.retot.dto.UserDTO;
 import com.uoc.retot.entity.User;

@@ -1,8 +1,6 @@
 package com.uoc.retot.service;
 
-import com.uoc.retot.dto.ResponseDTO;
 import com.uoc.retot.dto.UploadFileResponseDTO;
-import com.uoc.retot.dto.UserDTO;
 import com.uoc.retot.exceptions.OtherException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

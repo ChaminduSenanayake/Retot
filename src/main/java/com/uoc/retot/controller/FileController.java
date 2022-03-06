@@ -1,6 +1,5 @@
 package com.uoc.retot.controller;
 
-import com.uoc.retot.dto.UploadFileResponseDTO;
 import com.uoc.retot.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
