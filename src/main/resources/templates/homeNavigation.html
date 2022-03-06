@@ -25,7 +25,10 @@
                     <a class="nav-link" href="#" onclick="openOptimizationWindow()">Optimize Test Cases</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="openOptimizationWindow()">My Documents</a>
+                    <a class="nav-link" href="#" onclick="openDocumentWindow()">My Documents</a>
+                </li>
+                <li class="nav-item settings">
+                    <a class="nav-link" href="#" onclick="openUserSettingsModal()"><i class="fas fa-user-cog"></i> &nbsp Settings</a>
                 </li>
                 <li class="nav-item settings">
                     <a class="nav-link" href="#" onclick="logOut()"><i class="fas fa-user-cog"></i> &nbsp Log Out</a>
@@ -75,5 +78,6 @@
 <script th:src="@{/dist/lib/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/dist/lib/controllers/baseURL.js}"></script>
 <script th:src="@{/dist/lib/controllers/homeNavigation-controller.js}"></script>
+<script th:src="@{/dist/lib/controllers/userSettings-controller.js}"></script>
 </body>
 </html>

@@ -37,7 +37,7 @@ public class TestOptimizationService {
         String newFileName = userId + "-" + dtf.format(now);
         String txtFileName = newFileName+".txt";
         String generatedFileName = newFileName+"-Pairwise_Test_Case_Document.xls";
-        String folderName = "TXT";
+        String folderName = "Optimize";
         UploadFileResponseDTO uploadDTO = fileStorageService.storeFile(file, folderName, txtFileName);
         if (!uploadDTO.getFileName().equals(null)) {
             String fileLocation = uploadDTO.getTargetLocation().replace(txtFileName,"");

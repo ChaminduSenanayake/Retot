@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register Account</title>
+    <title>Test Optimization</title>
     <link rel="stylesheet" th:href="@{/dist/lib/css/optimizePage.css}" type="text/css"/>
     <link th:href="@{/dist/lib/css/bootstrap/bootstrap.min.css}" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/dist/lib/css/navBar.css}" type="text/css"/>
@@ -25,10 +25,13 @@
                     <a class="nav-link" href="#" onclick="openOptimizationWindow()">Optimize Test Cases</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="openOptimizationWindow()">My Documents</a>
+                    <a class="nav-link" href="#" onclick="openDocumentWindow()">My Documents</a>
                 </li>
                 <li class="nav-item settings">
-                    <a class="nav-link" href="#" onclick="logOut()"><i class="fas fa-user-cog"></i> &nbsp Log Out</a>
+                    <a class="nav-link" href="#" onclick="openUserSettingsModal()"><i class="fas fa-user-cog"></i> &nbsp Settings</a>
+                </li>
+                <li class="nav-item settings">
+                    <a class="nav-link" href="#" onclick="logOut()"><i class="fas fa-sign-out"></i> &nbsp Log Out</a>
                 </li>
             </ul>
         </div>
@@ -41,7 +44,7 @@
         <button type="button" id="btnAddCol" onclick="addColumn()" class="append_column">Add new column</button>
         <button type="button" id="saveTableData" onclick="openDownloadCSVModal()">Save & Download</button>
         <button type="button" id="GenDocumentPWD" onclick="generateTestCaseDocument()">Generate pairwise test case document</button>
-        <button type="button" ><input type="file" id="myFile"><button onclick="processCSVFile()">Load document</button></button>
+        <button type="button" ><input type="file" id="myFile" onchange="processCSVFile()"></button>
     </div>
     <div class="lowerSection">
         <table id="dataTable" width="350px">
@@ -78,7 +81,7 @@
         </table>
     </div>
 </div>
-<div class="modal fade" id="downloadModal" tabindex="-1 " aria-hidden="true">
+<div class="modal fade" id="downloadTableModal" tabindex="-1 " aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content ">
             <div class="modal-header">
@@ -86,7 +89,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body mt-2 mx-3">
-                <form id="DownloadTable">
+                <form id="DownloadTableModalForm">
                     <div class="form-group row mb-3">
                         <label class="col-sm-3 col-form-label">File Name</label>
                         <div class="col-sm-9">
@@ -125,12 +128,14 @@
         </div>
     </div>
 </div>
+<div th:insert="userSettings :: updateUser"></div>
 <script th:src="@{/dist/lib/jquery/jquery.min.js}"></script>
 <script th:src="@{/dist/lib/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/dist/lib/js/sweetalert.js}"></script>
 <script th:src="@{/dist/lib/controllers/baseURL.js}"></script>
 <script th:src="@{/dist/lib/controllers/baseURL.js}"></script>
 <script th:src="@{/dist/lib/controllers/testOptimization-controller.js}"></script>
+<script th:src="@{/dist/lib/controllers/userSettings-controller.js}"></script>
 
 </body>
 

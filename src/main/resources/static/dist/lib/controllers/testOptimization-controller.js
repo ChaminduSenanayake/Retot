@@ -247,11 +247,11 @@ function openNavigationWindow() {
 }
 
 function openDownloadCSVModal() {
-    let downloadModal = new bootstrap.Modal(document.getElementById('downloadModal'));
-    $('#downloadModal').on('show.bs.modal', function (event) {
+    let downloadTableModal = new bootstrap.Modal(document.getElementById('downloadTableModal'));
+    $('#downloadTableModal').on('show.bs.modal', function (event) {
         let modal = $(this);
     })
-    downloadModal.show();
+    downloadTableModal.show();
 }
 
 function saveDataTable() {

@@ -1,18 +1,17 @@
 package com.uoc.retot.controller;
 
+import com.uoc.retot.dto.UploadFileResponseDTO;
 import com.uoc.retot.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -43,4 +42,10 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
+
+//    @PostMapping("/document")
+//    public List<UploadFileResponseDTO> getAllDocuments(@RequestParam("userId") String userId){
+//        return fileStorageService.getAllDocuments(userId);
+//    }
+
 }

@@ -71,4 +71,17 @@ public class UserService {
         return "0";
     }
 
+    public ResponseDTO updateUser(UserDTO userDTO) {
+        User user = userRepository.getById(userDTO.getUserId());
+        if (user != null) {
+            user.setPassword(userDTO.getPassword());
+            userRepository.save(user);
+            if (userRepository.findById(user.getUserId()).isPresent()) {
+                return new ResponseDTO(true, "User Updated Successfully");
+            }
+        }
+        return new ResponseDTO(false, "User Update Failed");
+
+    }
+
 }

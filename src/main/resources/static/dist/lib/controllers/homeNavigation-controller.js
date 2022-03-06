@@ -9,6 +9,10 @@ function openNavigationWindow() {
     location.href = baseURL + "home/";
     return false;
 }
+function openDocumentWindow() {
+    location.href = baseURL + "home/";
+    return false;
+}
 function logOut(){
     location.href = baseURL+"user/logout"
     return false;
