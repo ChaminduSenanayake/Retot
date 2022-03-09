@@ -2,12 +2,16 @@ package com.uoc.retot.controller;
 
 import com.uoc.retot.dto.ResponseDTO;
 import com.uoc.retot.dto.UserDTO;
+import com.uoc.retot.dto.UserUpdateDTO;
 import com.uoc.retot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -41,8 +45,17 @@ public class UserController {
         return new ModelAndView("loginPage.html");
     }
     @PostMapping("/update")
-    public ResponseDTO updateUser(@RequestBody UserDTO userDTO){
+    public ResponseDTO updateUser(@RequestBody UserUpdateDTO userDTO){
         return userService.updateUser(userDTO);
     }
 
+    @GetMapping("/get/{userId}")
+    public UserDTO getUser(@PathVariable("userId") String userId, HttpServletRequest request){
+        String userID=userId;
+        if(userID==""){
+            HttpSession session = request.getSession();
+            userID = (String) request.getSession().getAttribute("userId");
+        }
+        return userService.getUser(userID);
+    }
 }

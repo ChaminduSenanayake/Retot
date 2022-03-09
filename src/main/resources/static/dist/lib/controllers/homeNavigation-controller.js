@@ -10,8 +10,7 @@ function openNavigationWindow() {
     return false;
 }
 function openDocumentWindow() {
-    location.href = baseURL + "home/";
-    return false;
+    swal("OOps!","This page is under construction", "error");
 }
 function logOut(){
     location.href = baseURL+"user/logout"

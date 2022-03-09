@@ -74,10 +74,13 @@
         </div>
     </div>
 </section>
+<div th:insert="userSettings :: updateUser"></div>
 <script th:src="@{/dist/lib/jquery/jquery.min.js}"></script>
+<script th:src="@{/dist/lib/js/sweetalert.js}"></script>
 <script th:src="@{/dist/lib/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/dist/lib/controllers/baseURL.js}"></script>
 <script th:src="@{/dist/lib/controllers/homeNavigation-controller.js}"></script>
 <script th:src="@{/dist/lib/controllers/userSettings-controller.js}"></script>
+<div type="button" id="userId" style="display: none">[[${userId}]]</div>
 </body>
 </html>

@@ -151,8 +151,7 @@ function clearTable() {
 function processCSVFile() {
     //get table element
     var table = document.getElementById('dataTable');
-    //remove existing rows and columns
-    clearTable();
+
     var fileSize = 0;
     //get file
     var theFile = document.getElementById('myFile');
@@ -160,6 +159,8 @@ function processCSVFile() {
     var regex = /^([a-zA-Z0-9~@#$^*()_+=[\]{}|\\,.?: -])+(.csv|.txt)$/;
     //check if file is CSV
     if (regex.test(theFile.value.toLowerCase())) {
+        //remove existing rows and columns
+        clearTable();
         //check if browser support FileReader
         if (typeof (FileReader) != "undefined") {
             var headerLine = "";
@@ -222,7 +223,10 @@ function tableToTxt() {
         for (let j = 2; j < existingRowCount; j++) {
             var row = table.rows[j];
             var rowObj = row.cells[i].childNodes[0];
-            childData.push(rowObj.value);
+            if(rowObj.value){
+                childData.push(rowObj.value);
+            }
+
         }
         colDetails = colName.value + ": " + childData + "\n";
         txt = txt + colDetails;
@@ -314,4 +318,7 @@ function generateTestCaseDocument() {
 }
 function logOut(){
     location.href = baseURL+"user/logout"
+}
+function openDocumentWindow() {
+    swal("OOps!","This page is under construction", "error");
 }

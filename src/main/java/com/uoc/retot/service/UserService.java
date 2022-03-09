@@ -2,6 +2,7 @@ package com.uoc.retot.service;
 
 import com.uoc.retot.dto.ResponseDTO;
 import com.uoc.retot.dto.UserDTO;
+import com.uoc.retot.dto.UserUpdateDTO;
 import com.uoc.retot.entity.User;
 import com.uoc.retot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,16 +71,29 @@ public class UserService {
         return "0";
     }
 
-    public ResponseDTO updateUser(UserDTO userDTO) {
+    public ResponseDTO updateUser(UserUpdateDTO userDTO) {
         User user = userRepository.getById(userDTO.getUserId());
         if (user != null) {
-            user.setPassword(userDTO.getPassword());
-            userRepository.save(user);
-            if (userRepository.findById(user.getUserId()).isPresent()) {
-                return new ResponseDTO(true, "User Updated Successfully");
+            if(userDTO.getOldPassword().equals(user.getPassword())){
+                user.setPassword(userDTO.getNewPassword());
+                userRepository.save(user);
+                if (userRepository.findById(user.getUserId()).isPresent()) {
+                    return new ResponseDTO(true, "User Updated Successfully");
+                }
+            }else{
+                return new ResponseDTO(false, "Invalid old password");
             }
+
         }
         return new ResponseDTO(false, "User Update Failed");
+
+    }
+    public UserDTO getUser(String userId) {
+        User user = userRepository.getById(userId);
+        if (user != null) {
+            return new UserDTO(user.getUserId(),user.getFirstName(),user.getLastName(),user.getEmail(),null);
+        }
+        return null;
 
     }
 
